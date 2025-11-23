@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Annotation Workspace</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <header class="header-bar">
+    <div id="nav-left">
+      <h1>Annotation Workspace</h1>
+    </div>
+    <div id="nav-right">
+      <span id="nav-username"></span>
+      <button id="btn-logout" onclick="logout()" style="display:none">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="sidebar glass-card">
+      <h3>Data Items</h3>
+      <button onclick="loadItems()">🔄 Refresh</button>
+      <ul id="dataList"></ul>
+    </div>
+
+    <div class="viewer glass-card">
+      <h3>Preview</h3>
+      <div id="previewBox" class="preview"></div>
+
+      <div class="nav-buttons">
+        <button onclick="prevItem()">⬅ Previous</button>
+        <button onclick="nextItem()">Next ➡</button>
+      </div>
+    </div>
+
+    <div class="label-panel glass-card">
+      <h3>Annotate</h3>
+      <label>Dataset (create or existing)</label>
+      <input type="text" id="datasetName" placeholder="e.g., Pet_Classification">
+
+      <label>Label</label>
+      <input type="text" id="labelInput" placeholder="e.g., dog">
+
+      <label>Annotator name</label>
+      <input type="text" id="annotator" placeholder="your username">
+
+      <button onclick="saveLabel()">Save Annotation</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/annotation_api.js"></script>
+</body>
+</html>
