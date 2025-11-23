@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Upload</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <header class="header-bar">
+    <div id="nav-left">
+      <h1>🗂️ Admin Upload</h1>
+    </div>
+    <div id="nav-right">
+      <span id="nav-username"></span>
+      <button id="btn-logout" onclick="logout()" style="display:none">Logout</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="upload-section glass-card">
+      <h2>Upload Files</h2>
+
+      <form id="uploadForm" enctype="multipart/form-data">
+        <div class="form-row">
+          <label>File Type</label>
+          <select name="file_type" required>
+            <option value="image">Image</option>
+            <option value="text">Text</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+            <option value="mixed">Text on Image</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Existing Folder / Category</label>
+          <select id="folderDropdown" name="folder">
+            <option value="">-- select existing --</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Or create new folder</label>
+          <input type="text" name="new_folder" placeholder="Create new folder name">
+        </div>
+
+        <div class="form-row">
+          <label>Select Files</label>
+          <input type="file" id="fileInput" name="file" multiple required onchange="previewFiles()">
+        </div>
+
+        <div id="filePreview" class="preview-box"></div>
+
+        <button type="submit" class="upload-btn">Upload</button>
+      </form>
+
+      <p id="uploadStatus"></p>
+
+      <hr>
+      <h3>Admin Actions</h3>
+      <div id="admin-actions" style="display:none">
+        <button id="openCreateUser" onclick="showCreateUser()">Create User</button>
+        <div id="createUserForm" style="display:none; margin-top:10px;">
+          <input id="newUsername" placeholder="username">
+          <input id="newPassword" placeholder="password" type="password">
+          <select id="newRole"><option value="user">user</option><option value="admin">admin</option></select>
+          <button onclick="createUser()">Create</button>
+          <div id="createUserMsg"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="dashboard glass-card" id="datasetDashboard">
+      <h3>📊 Dataset Overview (Admin)</h3>
+      <div id="dashboardStats">Loading...</div>
+      <hr>
+      <h4>Existing Datasets</h4>
+      <div id="datasetList">Loading...</div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/admin_api.js"></script>
+</body>
+</html>

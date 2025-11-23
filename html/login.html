@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Login</title><link rel="stylesheet" href="/static/css/styles.css"></head>
+<body>
+  <div class="center-box">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username"><br><br>
+    <input id="password" type="password" placeholder="Password"><br><br>
+    <button onclick="doLogin()">Login</button>
+    <div id="loginMsg"></div>
+  </div>
+<script>
+async function doLogin(){
+  const u=document.getElementById('username').value;
+  const p=document.getElementById('password').value;
+  const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})});
+  const j=await r.json();
+  const m=document.getElementById('loginMsg');
+  if(j.ok){
+    localStorage.setItem('token', j.token);
+    localStorage.setItem('user', JSON.stringify(j.user));
+    window.location = '/annotation';
+  } else {
+    m.textContent = j.error || 'Login failed';
+  }
+}
+</script>
+</body>
+</html>
